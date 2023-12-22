@@ -31,6 +31,7 @@
     "precompile": "koinos-precompiler-as src",
     "build": "yarn precompile && yarn asbuild",
     "deploy": "ts-node src/scripts/deployment.ts",
+    "mint": "ts-node src/scripts/mint.ts",
     "lint": "eslint --max-warnings 0 --ext ts \"*/assembly/**/*.ts\""
   },
   "config": {
