@@ -4,7 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "@koinos/sdk-as": "npm:@koinosbox/sdk-as@1.0.4-alpha.1",
-    "@koinosbox/contracts": "^1.2.3",
+    "@koinosbox/contracts": "^1.2.4",
     "koilib": "^5.5.4",
     "koinos-precompiler-as": "^1.2.0"
   },
