@@ -9,7 +9,11 @@ yarn install
 yarn build
 ```
 
-The WASM file will be generated in `src/build/release/nft.wasm`. To deploy it run:
+The WASM file will be generated in `src/build/release/nft.wasm`.
+
+Create a `.env` file by taking a copy of `.env.example` and fill the private keys and contract IDs accordingly. The mana sharer is the account with funds that will pay the mana, the transaction will include its signature for that. Thus, the new NFT does not need Koins in the address.
+
+To deploy it run:
 
 ```
 yarn deploy
