@@ -9,13 +9,4 @@ export class KondorElementusNft extends Nft {
   _symbol: string = "KONDOR-ELEMENTUS";
   _uri: string =
     "https://kondor-nft-api-w6enmqacja-uc.a.run.app/kondor-elementus";
-
-  /**
-   * Get name of the NFT
-   * @external
-   * @readonly
-   */
-  name(): common.str {
-    return new common.str(this._name);
-  }
 }
