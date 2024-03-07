@@ -1,6 +1,6 @@
 {
   "name": "kondor-elementus-nft",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "dependencies": {
     "@koinos/sdk-as": "npm:@koinosbox/sdk-as@1.1.0-alpha.4",

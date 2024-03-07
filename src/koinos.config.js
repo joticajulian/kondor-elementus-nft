@@ -3,6 +3,7 @@ require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
 module.exports = {
   class: "KondorElementusNft",
+  supportAbi1: true,
   proto: ["./proto/empty.proto"],
   files: ["./KondorElementusNft.ts"],
   sourceDir: "./assembly",

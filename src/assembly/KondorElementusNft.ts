@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Kondor Elementus NFT v1.0.0
+// Kondor Elementus NFT v1.1.0
 // Julian Gonzalez (joticajulian@gmail.com)
 
 import { Nft, common } from "@koinosbox/contracts";
