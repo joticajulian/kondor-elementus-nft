@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package elementus;
+
+import "koinos/options.proto";
+
+message mint_args {
+   bytes to = 1 [(koinos.btype) = ADDRESS];
+   uint64 number_tokens_to_mint = 2 [jstype = JS_STRING];
+}
