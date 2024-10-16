@@ -123,7 +123,11 @@ async function main() {
       const { blockNumber } = await tx.wait("byBlock", 60000);
       console.log(`mined in block ${blockNumber} (${networkName})`);
     } else {
-      console.log(`No transaction required: from ${current} to ${current + NFTS_PER_TX - 1}`);
+      console.log(
+        `No transaction required: from ${current} to ${
+          current + NFTS_PER_TX - 1
+        }`
+      );
     }
     current += NFTS_PER_TX;
   }

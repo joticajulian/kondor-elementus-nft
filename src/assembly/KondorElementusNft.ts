@@ -28,6 +28,14 @@ export class KondorElementusNft extends Nft {
     () => new common.boole(false)
   );
 
+  patchLevel: Storage.Obj<common.address> = new Storage.Obj(
+    this.contractId,
+    999,
+    common.address.decode,
+    common.address.encode,
+    () => new common.address(new Uint8Array(0))
+  );
+
   /**
    * @external
    * @readonly
@@ -69,6 +77,34 @@ export class KondorElementusNft extends Nft {
   //   this.totalDrops.put(totalDrops);
   // }
 
+  // patch(args: common.uint32): void {
+  //   const patchLevel = this.patchLevel.get()!;
+  //   let key = patchLevel.value!;
+  //
+  //   for (let i: u32 = 0; i < args.value; i += 1) {
+  //     const nextToken = this.drops.getNext(key);
+  //     if (!nextToken) break;
+  //
+  //     const tokenId = nextToken.key!;
+  //     const newTokenId = new Uint8Array(tokenId.length + 1);
+  //     newTokenId[0] = 0x30;
+  //     newTokenId.set(tokenId, 1);
+  //
+  //     const metadata = this.metadata_of(new nft.token(tokenId));
+  //     this._set_metadata(new nft.metadata_args(newTokenId, metadata.value));
+  //
+  //     key = nextToken.key!;
+  //   }
+  //
+  //   patchLevel.value = key;
+  //   this.patchLevel.put(patchLevel);
+  //
+  //   if (args.value == 123456) {
+  //     this.patchLevel.remove();
+  //     System.log("end patch");
+  //   }
+  // }
+
   /**
    *
    * @external
@@ -77,19 +113,19 @@ export class KondorElementusNft extends Nft {
   mint_drops(args: elementus.mint_args): void {
     System.require(
       args.number_tokens_to_mint > 0,
-      "number tokens to mint must be greater than 0",
+      "number tokens to mint must be greater than 0"
     );
 
     const amountPay = 50_0000_0000 * args.number_tokens_to_mint;
-      System.require(
-        amountPay / args.number_tokens_to_mint == 50_0000_0000,
-        "multiplication overflow",
-      );
+    System.require(
+      amountPay / args.number_tokens_to_mint == 50_0000_0000,
+      "multiplication overflow"
+    );
 
     if (amountPay > 0) {
       const koin = new IToken(System.getContractAddress("koin"));
       koin.transfer(
-        new token.transfer_args(args.to, this.contractId, amountPay),
+        new token.transfer_args(args.to, this.contractId, amountPay)
       );
     }
 
@@ -99,7 +135,13 @@ export class KondorElementusNft extends Nft {
       if (!nextToken) System.fail(`there are only ${i} NFTs available`);
       const tokenId = nextToken!.key!;
       this.drops.remove(tokenId);
-      this._mint(new nft.mint_args(args.to, tokenId));
+
+      // currently Kollection is not tracking burns
+      // then it's necessary to mint new token IDs
+      const newTokenId = new Uint8Array(tokenId.length + 1);
+      newTokenId[0] = 0x30;
+      newTokenId.set(tokenId, 1);
+      this._mint(new nft.mint_args(args.to, newTokenId));
       totalDrops.value -= 1;
     }
     this.totalDrops.put(totalDrops);
