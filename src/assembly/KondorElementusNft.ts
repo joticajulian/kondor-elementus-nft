@@ -116,9 +116,9 @@ export class KondorElementusNft extends Nft {
       "number tokens to mint must be greater than 0"
     );
 
-    const amountPay = 50_0000_0000 * args.number_tokens_to_mint;
+    const amountPay = 100_0000_0000 * args.number_tokens_to_mint;
     System.require(
-      amountPay / args.number_tokens_to_mint == 50_0000_0000,
+      amountPay / args.number_tokens_to_mint == 100_0000_0000,
       "multiplication overflow"
     );
 
