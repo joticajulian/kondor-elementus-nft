@@ -2,7 +2,7 @@
 // Kondor Elementus NFT v1.1.0
 // Julian Gonzalez (joticajulian@gmail.com)
 
-import { Storage, System, Arrays } from "@koinos/sdk-as";
+import { Storage, System } from "@koinos/sdk-as";
 import { IToken, Nft, common, nft, token } from "@koinosbox/contracts";
 import { elementus } from "./proto/elementus";
 
@@ -35,6 +35,23 @@ export class KondorElementusNft extends Nft {
     common.address.encode,
     () => new common.address(new Uint8Array(0))
   );
+
+  /**
+   * @external
+   * @readonly
+   */
+  can_use_smart_wallet_feature(args: common.address): common.boole {
+    // can use if the collection is sold
+    const totalDrops = this.totalDrops.get()!;
+    if (totalDrops.value == 0) return new common.boole(true);
+
+    // can use if holds an NFT
+    const tokens = this.get_tokens_by_owner(
+      new nft.get_tokens_by_owner_args(args.value!, null, 1)
+    );
+    const canUse = tokens.token_ids.length > 0;
+    return new common.boole(canUse);
+  }
 
   /**
    * @external
